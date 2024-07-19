@@ -1,6 +1,6 @@
 package cn.xjiangwei.RobotHelper.Service;
 
-import cn.xjiangwei.RobotHelper.GamePackage.Main;
+import cn.xjiangwei.RobotHelper.GamePackage.Main2;
 
 public class RunTime {
 
@@ -9,7 +9,7 @@ public class RunTime {
 
     private RunTime() {
         runtime = new Thread(() -> {
-            new Main().start();
+            new Main2().start();
         });
     }
 

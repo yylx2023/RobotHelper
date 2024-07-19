@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 import cn.xjiangwei.RobotHelper.Broadcast.ButtonBroadcastReceiver;
 import cn.xjiangwei.RobotHelper.R;
@@ -46,6 +47,7 @@ public class Controller extends Service {
     @Override
     public void onCreate() {
 
+        Log.e("rrr", "rrr onCreate");
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification);
 
 

@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
 import cn.xjiangwei.RobotHelper.MainApplication;
 import cn.xjiangwei.RobotHelper.Service.RunTime;
+import cn.xjiangwei.RobotHelper.Tools.MLog;
 
 import static cn.xjiangwei.RobotHelper.Service.Controller.ACTION_BUTTON;
 import static cn.xjiangwei.RobotHelper.Service.Controller.EXIT;
@@ -44,6 +45,7 @@ public class ButtonBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
+        MLog.info(action);
         if (action.equals(ACTION_BUTTON)) {
             //通过传递过来的ID判断按钮点击属性或者通过getResultCode()获得相应点击事件
             int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
