@@ -26,19 +26,29 @@ public class TB {
      * 在这个函数里面写你的业务逻辑
      */
     public void start() {
+
+
+        LogUtil.sendLog("获取任务列表");
         sleep(5000); //点击开始后等待5秒后再执行，因为状态栏收起有动画时间，建议保留这行代码
+
+        LogUtil.sendLog("开始执行任务");
         MLog.setDebug(true);
 
         Robot.setExecType(Robot.ExecTypeROOT);
 
         //打开淘宝 com.taobao.taobao
         //com.taobao.taobao/com.taobao.browser.BrowserActivity
+        LogUtil.sendLog("打开淘宝商品页");
         String cmd = "am start -n com.taobao.taobao/com.taobao.browser.BrowserActivity -d https://creator.guanghe.taobao.com/page/unify/contentDetail?contentId=472131055028&tab=1&mode=0&contentType=article&source=guanghe -f 0x10200000";
         ShellUtils.execCommand(cmd, true);
 
+
         sleep(5000);
 
-        //点击首页
+        LogUtil.sendLog("返回淘宝首页");
+        cmd = "am start com.taobao.taobao/com.taobao.tao.TBMainActivity";
+        ShellUtils.execCommand(cmd, true);
+        /*//点击首页
         Robot.tap(0x51, 0x5ef);
         sleep(3000);
         //点击搜索
@@ -49,7 +59,7 @@ public class TB {
         sleep(2000);
         //点击搜索
         Robot.tap(0x2aa, 0x5c);
-        /****************************  文本输入Demo   ******************************/
+        *//****************************  文本输入Demo   ******************************//*
         boolean ret = Robot.input("Hello World!");
         if (ret) {
             MLog.info("文本输入成功！");
@@ -65,7 +75,7 @@ public class TB {
         }
 
 
-        /****************************  模板匹配demo  *******************************/
+        *//****************************  模板匹配demo  *******************************//*
         InputStream is = null;
         try {
             is = MainApplication.getInstance().getAssets().open("ImgMatch.png");
@@ -80,7 +90,7 @@ public class TB {
         Robot.tap(point);
 
 
-        /**************************** 文字识别demo  **********************************/
+        *//**************************** 文字识别demo  **********************************//*
         try {
             //识别素材文件中的ocrTest.png图片中的文字
             is = MainApplication.getInstance().getAssets().open("ocrTest.png");
@@ -93,11 +103,11 @@ public class TB {
         MLog.info("文字识别结果：" + res);
 
 
-        /*****************************  特征点找图  ************************************/
+        *//*****************************  特征点找图  ************************************//*
         //当前屏幕中查找chrome图标（特征点是3120X1440分辨率手机制作）
         point = Image.findPointByMulColor(ScreenCaptureUtil.getScreenCap(), "434FD7,65|0|414DDB,90|55|46CDFF,5|86|5FA119");
         //点击chrome图标
-        Robot.tap(point);
+        Robot.tap(point);*/
 
 
         /*****************************  双指缩放操作  ************************************/

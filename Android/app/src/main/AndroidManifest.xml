@@ -60,7 +60,7 @@
                 android:name="xposedminversion"
                 android:value="30" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.gf.tb.TBActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

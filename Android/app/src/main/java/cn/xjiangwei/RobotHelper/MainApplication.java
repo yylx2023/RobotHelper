@@ -1,10 +1,23 @@
 package cn.xjiangwei.RobotHelper;
 
+import com.lzf.easyfloat.EasyFloat;
+import com.lzf.easyfloat.enums.ShowPattern;
+import com.lzf.easyfloat.interfaces.OnInvokeView;
+
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.content.LocalBroadcastManager;
+import android.view.View;
+import android.widget.TextView;
 
 import cn.xjiangwei.RobotHelper.Accessibility.HttpServer;
 import cn.xjiangwei.RobotHelper.Service.Accessibility;
-import cn.xjiangwei.RobotHelper.Service.Controller;
 
 
 public class MainApplication extends Application {
@@ -17,11 +30,54 @@ public class MainApplication extends Application {
         return instance;
     }
 
+    @SuppressLint("HandlerLeak")
+    private Handler uiHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (null == tvLog) {
+                return;
+            }
+
+            String content = tvLog.getText().toString();
+            tvLog.setText(content + "\n" + msg.obj);
+        }
+    };
+
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String text = intent.getStringExtra("log");
+
+            uiHandler.obtainMessage(100, text).sendToTarget();
+        }
+    };
+
+    private TextView tvLog;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        EasyFloat.with(this).setLayout(R.layout.floating, new OnInvokeView() {
+            @Override
+            public void invoke(View view) {
+                tvLog = view.findViewById(R.id.tvItemFx);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                    }
+                });
+            }
+        }).setShowPattern(ShowPattern.ALL_TIME).show();
+
+        IntentFilter filter = new IntentFilter("cc");
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
     }
 
 
